@@ -10,7 +10,6 @@ int main()
     freopen("output.txt", "w", stdout);
     bigint a, b;
     cin >> a >> b;
-    bigint c = a % b;
-    cout << c;
+    cout << a - b;
     return 0;
 }

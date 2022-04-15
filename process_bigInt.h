@@ -120,3 +120,67 @@ bigNum operator*(bigNum a, bigNum b)
 
     return product;
 }
+
+bigNum operator/(bigNum a, bigNum b)
+{
+    bigNum quotient;
+    quotient.clear();
+    bigNum carry;
+
+    while (a.size() > 0)
+    {
+        int finish = a.size() - 1;
+        int start = finish - b.size() + 1;
+        if (start < 0)
+            start = 0;
+        int count = start;
+
+        if (carry.size() == 0)
+        {
+            while (count <= finish)
+            {
+                carry.push_back(a[start]);
+                a.pop_back();
+                ++count;
+            }
+        }
+        else
+        {
+            while (count <= finish)
+            {
+                carry.insert(carry.begin(), a[start]);
+                a.pop_back();
+                ++count;
+            }
+        }
+
+        if ((carry < b) || (carry == b) && a.size() > 0)
+        {
+            carry.insert(carry.begin(), a[start - 1]);
+            a.pop_back();
+        }
+
+        standardize(carry);
+
+        count = 0;
+        while (carry < b || carry == b)
+        {
+            ++count;
+            carry = carry - b;
+        }
+
+        if (count >= 10)
+        {
+            int x = count % 10;
+            count /= 10;
+            int y = count % 10;
+            count /= 10;
+            quotient.insert(quotient.begin(), y);
+            quotient.insert(quotient.begin(), x);
+        }
+        else
+        {
+            quotient.insert(quotient.begin(), count);
+        }
+    }
+}
