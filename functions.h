@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include "BigInt.h"
 
 BigInt x, y, g;
