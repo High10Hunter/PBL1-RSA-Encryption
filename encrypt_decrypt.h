@@ -35,47 +35,47 @@ string decode(string str, int len)
     return decode_string;
 }
 
-BigInt encryptPiece(string original_message, key public_key)
+BigInt encryptPiece(string message, key public_key)
 {
-    BigInt encrypted_mess = encode(original_message, original_message.length());
+    BigInt encrypted_mess = encode(message, message.length());
     encrypted_mess = binaryPower(encrypted_mess, public_key.exponent, public_key.modulus);
     return encrypted_mess.ToString();
 }
 
 string decryptPiece(BigInt &encrypted_mess, key private_key)
 {
-    BigInt a = encrypted_mess;
-    a = binaryPower(a, private_key.exponent, private_key.modulus);
-    return decode(a, a.Length());
+    BigInt temp = encrypted_mess;
+    temp = binaryPower(temp, private_key.exponent, private_key.modulus);
+    return decode(temp, temp.Length());
 }
 
-string encryptString(const string original_message, const key public_key)
+string encryptString(const string message, const key public_key)
 {
     const unsigned long int pieceSize(((public_key.modulus.Length() - 2) / 3));
-    const unsigned long int pieceCount = original_message.length() / pieceSize;
+    const unsigned long int pieceCount = message.length() / pieceSize;
 
     string encrypted_text;
     for (unsigned long int i = 0; i < pieceCount; i++)
     {
-        string piece(original_message.substr(i * pieceSize, pieceSize));
+        string piece(message.substr(i * pieceSize, pieceSize));
         piece = encryptPiece(piece, public_key);
         encrypted_text.append(piece.append(" "));
     }
-    if (pieceSize * pieceCount == original_message.length())
+    if (pieceSize * pieceCount == message.length())
         return encrypted_text;
 
-    const unsigned long int lastPieceSize = original_message.length() % pieceSize;
-    string lastPiece(original_message.substr(pieceCount * pieceSize, lastPieceSize));
+    const unsigned long int lastPieceSize = message.length() % pieceSize;
+    string lastPiece(message.substr(pieceCount * pieceSize, lastPieceSize));
     lastPiece = encryptPiece(lastPiece, public_key);
     return encrypted_text.append(lastPiece.append(" "));
 }
 
-string Encrypt(const string original_message, const key public_key)
+string Encrypt(const string encrypted_mess, const key public_key)
 {
-    return encryptString(original_message, public_key);
+    return encryptString(encrypted_mess, public_key);
 }
 
-string decryptString(const string &encrypted_text, const key &private_key)
+string decryptString(const string encrypted_text, const key private_key)
 {
     string original_message;
     long int i = 0, j = 0;
@@ -92,7 +92,7 @@ string decryptString(const string &encrypted_text, const key &private_key)
     return original_message;
 }
 
-string Decrypt(const string &encrypted_text, const key &private_key)
+string Decrypt(const string encrypted_text, const key private_key)
 {
     return decryptString(encrypted_text, private_key);
 }
