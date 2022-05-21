@@ -1,5 +1,3 @@
-// #include <bits/stdc++.h>
-#include <cstdlib>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -16,7 +14,7 @@ int main()
 {
     std::srand(time(NULL));
 
-    cout << "------------------RSA ENCRYPTION---------------\n";
+    cout << "---------------RSA ENCRYPTION---------------\n";
     cout << "1.Generate keys" << endl;
     cout << "2.Encrypt Message" << endl;
     cout << "3.Decrypt Message" << endl;
@@ -29,7 +27,7 @@ int main()
     {
         while (1)
         {
-            cout << "------------------RSA ENCRYPTION---------------\n";
+            cout << "---------------RSA ENCRYPTION---------------\n";
             cout << "1.Generate keys" << endl;
             cout << "2.Encrypt Message" << endl;
             cout << "3.Decrypt Message" << endl;
@@ -46,12 +44,14 @@ int main()
                 cout << "Enter number of iterations in Miller-Rabin test: ";
                 cin >> iteration;
                 keyPair key_pair = generateKeys(key_length, iteration);
-                cout << "Public key { " << endl;
+                cout << "Public key" << endl;
+                cout << "{" << endl;
                 cout << "e = " << key_pair.public_key.exponent << endl;
                 cout << "n = " << key_pair.public_key.modulus << endl;
                 cout << "}" << endl;
-                cout << "Private key { " << endl;
-                cout << "d =  " << key_pair.private_key.exponent << endl;
+                cout << "Private key" << endl;
+                cout << "{" << endl;
+                cout << "d = " << key_pair.private_key.exponent << endl;
                 cout << "n = " << key_pair.private_key.modulus << endl;
                 cout << "}" << endl;
             }
@@ -77,6 +77,7 @@ int main()
                 cout << "Enter encrypted message: ";
                 cin.ignore();
                 getline(cin, encrypted_message);
+                encrypted_message += " ";
                 key private_key;
                 cout << "Enter your private key:" << endl;
                 cout << "d = ";
@@ -112,12 +113,14 @@ int main()
                 cin >> key_length;
                 cin >> iteration;
                 keyPair key_pair = generateKeys(key_length, iteration);
-                cout << "Public key { " << endl;
+                cout << "Public key" << endl;
+                cout << "{" << endl;
                 cout << "e = " << key_pair.public_key.exponent << endl;
                 cout << "n = " << key_pair.public_key.modulus << endl;
                 cout << "}" << endl;
-                cout << "Private key { " << endl;
-                cout << "d =  " << key_pair.private_key.exponent << endl;
+                cout << "Private key" << endl;
+                cout << "{" << endl;
+                cout << "d = " << key_pair.private_key.exponent << endl;
                 cout << "n = " << key_pair.private_key.modulus << endl;
                 cout << "}" << endl;
             }
@@ -138,6 +141,7 @@ int main()
                 string encrypted_message;
                 cin.ignore();
                 getline(cin, encrypted_message);
+                encrypted_message += " ";
                 key private_key;
                 cin >> private_key.exponent;
                 cin >> private_key.modulus;
