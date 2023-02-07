@@ -1,4 +1,4 @@
-RSA Encryption 🔑🔒
+# RSA Encryption 🗝🔒
 ## 1) Demo
 <img src="https://github.com/RandomName1915/gif_repo/blob/main/RSA-demo.gif" width="500">
 
